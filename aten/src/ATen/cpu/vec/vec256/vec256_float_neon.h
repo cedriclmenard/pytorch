@@ -25,6 +25,7 @@ namespace {
 //    https://bugs.llvm.org/show_bug.cgi?id=45824
 // Most likely we will do aarch32 support with inline asm.
 #if defined(__aarch64__)
+#if defined(__clang__) ||(__GNUC__ > 8 || (__GNUC__ == 8 && __GNUC_MINOR__ > 3))
 
 #ifdef __BIG_ENDIAN__
 #error "Big endian is not supported."
@@ -713,6 +714,7 @@ Vectorized<float> inline fmadd(const Vectorized<float>& a, const Vectorized<floa
   return Vectorized<float>(r0, r1);
 }
 
+#endif /* defined(clang) */
 #endif /* defined(aarch64) */
 
 }}}
